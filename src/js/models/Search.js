@@ -1,4 +1,5 @@
 import axios from "axios";
+import {key,proxy} from '../config';
 
 // ==Create search Object
 export default class Search{
@@ -7,16 +8,15 @@ export default class Search{
     }
     
     async getResults(){
-    // const key = "AIzaSyAC3SreNBu3SzBFIdLHyLED4XX2Y9Bsng4";
-    const proxy = "https://cors-anywhere.herokuapp.com/";
+    
     try {
-        const res = await axios(`${proxy}https://www.googleapis.com/books/v1/volumes/?q=${this.query}`);
+        const res = await axios(`https://www.googleapis.com/books/v1/volumes/?q=${this.query}&maxResults=40`);
 //  the result is held here
         this.books = res.data.items;
         
     }
     catch(error){
-        alert(error);
+        alert("There was a problem with fetching a query");
     }
 }
 }
